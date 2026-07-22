@@ -51,6 +51,12 @@ namespace VoteBase.StepDefinitions
             Assert.AreEqual(winner, this._target.Winner());
         }
 
+        [Then("there is a tie")]
+        public void ThenThereIsATie()
+        {
+            Assert.IsNull(this._target.Winner());
+        }
+
         #endregion
     }
 }

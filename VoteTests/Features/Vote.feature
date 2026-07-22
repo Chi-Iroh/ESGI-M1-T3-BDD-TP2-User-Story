@@ -34,3 +34,16 @@ Scenario: 2 rounds
 		| C | 55 |
 	When vote ends
 	Then the winner should be C
+
+Scenario: 2 rounds with tie
+	Given candidates are
+		| Candidates | Votes |
+		| Mt Sain Michel --> Bretagne | 49 |
+		| Mt Sain Michel --> Normandie | 49 |
+		| Mt Sain Michel --> Corse | 2 |
+	And candidates of the 2nd round are
+		| Candidates | Votes |
+		| Mt Sain Michel --> Bretagne | 50 |
+		| Mt Sain Michel --> Normandie | 50 |
+	When vote ends
+	Then there is a tie
