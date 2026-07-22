@@ -2,7 +2,7 @@ Feature: Vote
 
 Simple Vote system
 
-Scenario: 51% vs 49%
+Scenario: 1 round, 51% vs 49%
 	Given candidates are
 	| Candidates | Votes |
 	| Ronald Plump | 49 |
@@ -10,7 +10,7 @@ Scenario: 51% vs 49%
 	When vote ends
 	Then the winner should be Joe Widen
 
-Scenario: 50+% with many candidates
+Scenario: 1 round, 50+% with many candidates
 	Given candidates are
 	| Candidates | Vote |
 	| Emmanuel Valse | 0 |
@@ -19,6 +19,16 @@ Scenario: 50+% with many candidates
 	| Citroën AMI | 97 |
 	When vote ends
 	Then the winner should be Citroën AMI
+
+Scenario: 1 round, tie with 2nd and 3rd candidates
+	Given candidates are
+	| Candidates | Vote |
+	| IBM | 60 |
+	| Google | 40 |
+	| Meta | 40 |
+	| Microsoft | 0 |
+	When vote ends
+	Then the winner should be IBM
 
 Scenario: 2 rounds
 	Given candidates are

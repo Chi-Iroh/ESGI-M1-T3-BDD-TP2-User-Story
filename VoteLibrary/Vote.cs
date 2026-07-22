@@ -7,6 +7,23 @@ public class Vote
     private bool end = false;
     private int totalVotes => candidates.Sum(x => x.Item2);
 
+    // 2nd candidate = 3rd candidate
+    // 1st candidate < 50%
+    // 1st candidate wins
+    private string? WinnerFirstRoundByTieWithSecondAndThirdCandidate()
+    {
+        if (candidates.Count < 3)
+        {
+            return null;
+        }
+        List<(string, int)> orderedCandidates = candidates.OrderBy(x => x.Item2).Reverse().ToList();
+        if (orderedCandidates[1].Item2 == orderedCandidates[2].Item2)
+        {
+            return orderedCandidates[0].Item1;
+        }
+        return null;
+    }
+
     private string? WinnerFirstRound()
     {
         foreach ((string candidate, int votes) in candidates)
@@ -15,6 +32,11 @@ public class Vote
             {
                 return candidate;
             }
+        }
+        string? winner = WinnerFirstRoundByTieWithSecondAndThirdCandidate();
+        if (winner is not null)
+        {
+            return winner;
         }
         return null;
     }
