@@ -100,4 +100,13 @@ public class Vote
     {
         return end;
     }
+
+    public List<string> SortedResults()
+    {
+        if (!end)
+        {
+            throw new Exception("Vote hasn't finished !");
+        }
+        return candidates.OrderBy(x => x.Item1).Reverse().Select(x => $"{x.Item1} --> {x.Item2} votes").ToList();
+    }
 }

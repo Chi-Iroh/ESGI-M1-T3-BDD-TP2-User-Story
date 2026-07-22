@@ -117,7 +117,7 @@ namespace VoteBase.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Vote.feature.ndjson", 7);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Vote.feature.ndjson", 8);
         }
         
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("51% vs 49%")]
@@ -369,6 +369,55 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
 #line 56
  await testRunner.ThenAsync("the vote hasn\'t finished", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Check results")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Check results")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Vote")]
+        public async global::System.Threading.Tasks.Task CheckResults()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "5";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check results", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 58
+this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
+                            "Candidates",
+                            "Vote"});
+                table8.AddRow(new string[] {
+                            "Pain au chocolat",
+                            "98"});
+                table8.AddRow(new string[] {
+                            "Chocolatine",
+                            "2"});
+#line 59
+ await testRunner.GivenAsync("candidates are", ((string)(null)), table8, "Given ");
+#line hidden
+#line 63
+ await testRunner.WhenAsync("vote ends", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
+                            "Results"});
+                table9.AddRow(new string[] {
+                            "Pain au chocolat --> 98 votes"});
+                table9.AddRow(new string[] {
+                            "Chocolatine --> 2 votes"});
+#line 64
+ await testRunner.ThenAsync("results should be", ((string)(null)), table9, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

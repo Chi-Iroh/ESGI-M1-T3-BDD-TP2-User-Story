@@ -69,6 +69,16 @@ namespace VoteBase.StepDefinitions
             }
         }
 
+        [Then("results should be")]
+        public void ThenResultsShouldBe(Table table)
+        {
+
+            foreach ((DataTableRow row, string result) in table.Rows.Zip(this._target.SortedResults()))
+            {
+                Assert.AreEqual(row[0], result);
+            }
+        }
+
         #endregion
     }
 }
