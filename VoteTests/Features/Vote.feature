@@ -19,3 +19,18 @@ Scenario: 50+% with many candidates
 	| Citroën AMI | 97 |
 	When vote ends
 	Then the winner should be Citroën AMI
+
+Scenario: 2 rounds
+	Given candidates are
+		| Candidates | Votes |
+		| C++ | 40 |
+		| C | 35 |
+		| Rust | 20 |
+		| Python | 5 |
+		| Java | 0 |
+	And candidates of the 2nd round are
+		| Candidate | Votes |
+		| C++ | 45 |
+		| C | 55 |
+	When vote ends
+	Then the winner should be C

@@ -8,41 +8,49 @@ namespace VoteBase.StepDefinitions
         // For additional details on Reqnroll step definitions see https://go.reqnroll.net/doc-stepdef
 
         private readonly Vote _target = new Vote();
-        private int _number1;
-        private int _number2;
-        private int _result;
 
-        [Given("the first number is {int}")]
-        public void GivenTheFirstNumberIs(int number)
+        #region Given
+
+        [Given("candidates are")]
+        public void GivenCandidatesAre(Table table)
         {
-            //TODO: implement arrange (precondition) logic
-            // For storing and retrieving scenario-specific data see https://go.reqnroll.net/doc-sharingdata
-            // To use the multiline text or the table argument of the scenario,
-            // additional string/Table parameters can be defined on the step definition
-            // method. 
-
-            _number1 = number;
+            foreach (DataTableRow row in table.Rows)
+            {
+                this._target.RegisterCandidate(row[0], int.Parse(row[1]));
+            }
         }
 
-        [Given("the second number is {int}")]
-        public void GivenTheSecondNumberIs(int number)
+        #endregion
+
+        #region when
+
+        [When("vote ends")]
+        public void WhenVoteEnds()
         {
-            //TODO: implement arrange (precondition) logic
-            _number2 = number;
+            this._target.EndRound();
         }
 
-        [When("the two numbers are added")]
-        public void WhenTheTwoNumbersAreAdded()
+        [Given("candidates of the 2nd round are")]
+        public void When2ndRound(Table table)
         {
-            //TODO: implement act (action) logic
-            _result = _target.Add(_number1, _number2);
+            this._target.EndRound();
+            Assert.IsFalse(this._target.IsEnd());
+            foreach (DataTableRow row in table.Rows)
+            {
+                this._target.SetSecondRoundVotes(row[0], int.Parse(row[1]));
+            }
         }
 
-        [Then("the result should be {int}")]
-        public void ThenTheResultShouldBe(int result)
+        #endregion
+
+        #region Then
+
+        [Then("the winner should be (.*)")]
+        public void ThenTheWinnerShouldBe(string winner)
         {
-            //TODO: implement assert (verification) logic
-            Assert.AreEqual(result, _result);   
+            Assert.AreEqual(winner, this._target.Winner());
         }
+
+        #endregion
     }
 }
