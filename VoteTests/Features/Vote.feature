@@ -47,3 +47,10 @@ Scenario: 2 rounds with tie
 		| Mt Sain Michel --> Normandie | 50 |
 	When vote ends
 	Then there is a tie
+
+Scenario: End vote before asking for the winner
+	Given candidates are
+		| Candidates | Vote |
+		| a | 0 |
+		| b | 1 |
+	Then the vote hasn't finished

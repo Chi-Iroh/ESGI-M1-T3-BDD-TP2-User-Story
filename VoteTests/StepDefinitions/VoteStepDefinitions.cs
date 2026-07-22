@@ -57,6 +57,18 @@ namespace VoteBase.StepDefinitions
             Assert.IsNull(this._target.Winner());
         }
 
+        [Then("the vote hasn't finished")]
+        public void ThenTheVoteHasNotFinished()
+        {
+            try
+            {
+                this._target.Winner();
+            } catch (Exception e)
+            {
+                Assert.AreEqual(e.Message, "Vote isn't complete !");
+            }
+        }
+
         #endregion
     }
 }
