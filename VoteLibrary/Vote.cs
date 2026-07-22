@@ -5,12 +5,13 @@ public class Vote
     private List<(string, int)> candidates = new();
     private int round = 1;
     private bool end = false;
+    private int totalVotes => candidates.Sum(x => x.Item2);
 
     private string? WinnerFirstRound()
     {
-        foreach ((string candidate, int res) in candidates)
+        foreach ((string candidate, int votes) in candidates)
         {
-            if (res >= 50)
+            if ((decimal)votes / totalVotes > 0.5m)
             {
                 return candidate;
             }
@@ -101,12 +102,27 @@ public class Vote
         return end;
     }
 
+    private string CandidateToString(string candidate, int votes)
+    {
+        string result = $"{candidate} has {votes} vote";
+        if (votes >= 2)
+        {
+            result += 's';
+        }
+
+        float percentage = (float)votes * 100 / totalVotes;
+
+        result += $" ({percentage.ToString("0.##")}%)";
+
+        return result;
+    }
+
     public List<string> SortedResults()
     {
         if (!end)
         {
             throw new Exception("Vote hasn't finished !");
         }
-        return candidates.OrderBy(x => x.Item1).Reverse().Select(x => $"{x.Item1} --> {x.Item2} votes").ToList();
+        return candidates.OrderBy(x => x.Item1).Reverse().Select(x => CandidateToString(x.Item1, x.Item2)).ToList();
     }
 }

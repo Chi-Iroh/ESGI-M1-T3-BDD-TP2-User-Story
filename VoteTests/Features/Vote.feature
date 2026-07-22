@@ -58,10 +58,10 @@ Scenario: End vote before asking for the winner
 Scenario: Check results
 	Given candidates are
 		| Candidates | Vote |
-		| Pain au chocolat | 98 |
-		| Chocolatine | 2 |
+		| Pain au chocolat | 49 |
+		| Chocolatine | 1 |
 	When vote ends
 	Then results should be
 		| Results |
-		| Pain au chocolat --> 98 votes |
-		| Chocolatine --> 2 votes |
+		| Pain au chocolat has 49 votes (98%) |
+		| Chocolatine has 1 vote (2%) |

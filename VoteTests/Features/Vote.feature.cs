@@ -400,10 +400,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "Vote"});
                 table8.AddRow(new string[] {
                             "Pain au chocolat",
-                            "98"});
+                            "49"});
                 table8.AddRow(new string[] {
                             "Chocolatine",
-                            "2"});
+                            "1"});
 #line 59
  await testRunner.GivenAsync("candidates are", ((string)(null)), table8, "Given ");
 #line hidden
@@ -413,9 +413,9 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                 global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
                             "Results"});
                 table9.AddRow(new string[] {
-                            "Pain au chocolat --> 98 votes"});
+                            "Pain au chocolat has 49 votes (98%)"});
                 table9.AddRow(new string[] {
-                            "Chocolatine --> 2 votes"});
+                            "Chocolatine has 1 vote (2%)"});
 #line 64
  await testRunner.ThenAsync("results should be", ((string)(null)), table9, "Then ");
 #line hidden
