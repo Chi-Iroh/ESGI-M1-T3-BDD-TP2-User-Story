@@ -70,6 +70,10 @@ public class Vote
         } else if (round == 2)
         {
             throw new Exception("2nd round, cannot add new candidates !");
+        } else if (candidate.Count() == 0)
+        {
+            // blank vote, ignore it
+            return;
         }
         candidates.Add((candidate, votesPercentage));
     }
@@ -79,6 +83,9 @@ public class Vote
         if (round == 1)
         {
             throw new Exception("Only set vote on the 2nd round !");
+        } else if (candidate.Count() == 0)
+        {
+            throw new Exception("Cannot set votes for blank votes !");
         }
 
         for (int i = 0; i < candidates.Count; i++)

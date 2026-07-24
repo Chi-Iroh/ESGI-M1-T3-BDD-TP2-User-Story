@@ -75,3 +75,15 @@ Scenario: Check results
 		| Results |
 		| Pain au chocolat has 49 votes (98%) |
 		| Chocolatine has 1 vote (2%) |
+
+Scenario: Ignore blank votes
+	Given candidates are
+		| Candidates | Vote |
+		| a | 10 |
+		| b | 30 |
+		| | 20 |
+	When vote ends
+	Then results should be
+		| Results |
+		| b has 30 votes (75%) |
+		| a has 10 votes (25%) |

@@ -117,7 +117,7 @@ namespace VoteBase.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Vote.feature.ndjson", 9);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Vote.feature.ndjson", 10);
         }
         
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("1 round, 51% vs 49%")]
@@ -467,6 +467,58 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "Chocolatine has 1 vote (2%)"});
 #line 74
  await testRunner.ThenAsync("results should be", ((string)(null)), table10, "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Ignore blank votes")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ignore blank votes")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Vote")]
+        public async global::System.Threading.Tasks.Task IgnoreBlankVotes()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "7";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ignore blank votes", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 79
+this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
+                            "Candidates",
+                            "Vote"});
+                table11.AddRow(new string[] {
+                            "a",
+                            "10"});
+                table11.AddRow(new string[] {
+                            "b",
+                            "30"});
+                table11.AddRow(new string[] {
+                            "",
+                            "20"});
+#line 80
+ await testRunner.GivenAsync("candidates are", ((string)(null)), table11, "Given ");
+#line hidden
+#line 85
+ await testRunner.WhenAsync("vote ends", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+                global::Reqnroll.Table table12 = new global::Reqnroll.Table(new string[] {
+                            "Results"});
+                table12.AddRow(new string[] {
+                            "b has 30 votes (75%)"});
+                table12.AddRow(new string[] {
+                            "a has 10 votes (25%)"});
+#line 86
+ await testRunner.ThenAsync("results should be", ((string)(null)), table12, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
